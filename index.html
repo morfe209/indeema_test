@@ -70,64 +70,69 @@
     </div>
     <div id="table" class="container">
       <h2>Task3: table</h2>
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
 
-      <table class="table">
+      <form>
+        <div class="form-row">
+          <div class="col-md-3 mb-3">
+            <label for="first-name">First name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="first-name"
+              placeholder="First name"
+              required
+            />
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="last-name">Last name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="last-name"
+              placeholder="Last name"
+              required
+            />
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              class="form-control is-valid"
+              id="email"
+              placeholder="Email"
+              required
+            />
+            <div class="invalid-feedback">Please provide a valid email.</div>
+          </div>
+        </div>
+
+        <button id="addUser" class="btn btn-primary" type="submit">
+          submit user
+        </button>
+      </form>
+
+      <!--
+        =============================================================================
+      -->
+      <table id="test-table" class="table">
         <thead class="thead-light">
           <tr>
-            <th scope="col">#</th>
             <th scope="col">First</th>
             <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">email</th>
+            <th scope="col">created</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
+          <tr id="1">
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
+            <td>2 dece</td>
+            <td>2 dece</td>
+            <td>2 dece</td>
           </tr>
         </tbody>
       </table>

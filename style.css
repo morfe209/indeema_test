@@ -53,7 +53,7 @@ body {
 }
 
 /* The Close Button */
-.close {
-  width: 100px;
+.closeBtn {
+  width: 25px;
   color: #fefefe;
 }

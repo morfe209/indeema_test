@@ -1,3 +1,4 @@
+"use strict";
 //==================================================================
 // Calculate change
 const btnChange = document.getElementById("btn-change");
@@ -54,38 +55,34 @@ function calculateChange() {
 //====================================================================
 // Modal Window
 function generateModalWindow() {
-  // let iterator;
-  // if (!iterator) iterator = 1;
-  // iterator++;
-  let div = document.getElementById("modal");
-
   let divOut = document.createElement("div");
-  let divIn = document.createElement("div");
-  let closeBtn = document.createElement("span");
-  let p = document.createElement("p");
-  let x = document.createTextNode(`x`);
-  let text = document.createTextNode(`Modal Window`);
-
-  div.appendChild(divOut);
-  divIn.className = "modal-content";
-  divOut.appendChild(divIn);
-  divOut.id = "myModal";
+  divOut.id = `myModal`;
   divOut.className = "modal";
-  closeBtn.className = "btn btn-danger btn-sm close";
-  closeBtn.id = "close";
-  divIn.appendChild(closeBtn);
-  divIn.appendChild(p);
-  p.appendChild(text);
-  closeBtn.appendChild(x);
+  divOut.innerHTML = `<div class="modal-content">
+  <span id="close" class="btn btn-danger btn-sm closeBtn">x</span>
+  <p>Modal Window</p>
+  </div>`;
+
+  return divOut;
 }
+
+// let iterator;
 let modal;
-let span;
 const btn = document.getElementById("myBtn");
+
 btn.onclick = function() {
-  generateModalWindow();
-  modal = document.getElementById("myModal");
+  // if (!iterator) iterator = 1;
+
+  let div = document.getElementById("modal");
+  const divOut = generateModalWindow();
+  div.appendChild(divOut);
+
+  modal = document.getElementById(`myModal`);
   modal.style.display = "block";
-  span = document.getElementById("close");
+
+  // iterator++;
+
+  const span = document.getElementById(`close`);
   span.onclick = function() {
     modal.remove();
   };
@@ -98,3 +95,42 @@ window.onclick = function(event) {
 
 //====================================================================
 //table
+
+const addUser = document.getElementById("addUser");
+let idRow;
+
+addUser.onclick = function() {
+  const tbody = document.getElementsByName("tbody");
+  if (!idRow) idRow = 1;
+  const firstName = document.getElementById("first-name").value;
+  const lastName = document.getElementById("last-name").value;
+  const email = document.getElementById("email").value;
+  const createdAt = Date.now();
+  const row = genereteRowForTable(idRow, firstName, lastName, email, createdAt);
+  console.log(row);
+  // tbody.appendChild(row);
+};
+
+function genereteRowForTable(idRow, firstName, lastName, email, createdAt) {
+  const tr = document.createElement("tr");
+  tr.id = idRow;
+  const btnDel = generateDeleteRowBtn(idRow);
+  // btnDel.onclick=function(){
+
+  // }
+  btnDel.addEventListener("click", deleteRow, idRow);
+  tr.innerHTML = `<td>${firstName}</td><td>${lastName}</td><td>${email}</td><td>${createdAt}</td><td>${btnDel}</td>`;
+  return tr;
+}
+function generateDeleteRowBtn(idRow) {
+  const btnDel = document.createElement("btn");
+  btnDel.id = `del-${idRow}`;
+  btnDel.className = "btn btn-danger btn-sm";
+  btnDel.innerText = "delete";
+  return btnDel;
+}
+
+function deleteRow(idRow) {
+  const tr = document.getElementById(idRow);
+  tr.remove();
+}
