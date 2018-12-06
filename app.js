@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 //==================================================================
 // Calculate change
 const btnChange = document.getElementById("btn-change");
@@ -62,25 +62,17 @@ function generateModalWindow() {
   <span id="close" class="btn btn-danger btn-sm closeBtn">x</span>
   <p>Modal Window</p>
   </div>`;
-
   return divOut;
 }
-
-// let iterator;
 let modal;
 const btn = document.getElementById("myBtn");
-
 btn.onclick = function() {
-  // if (!iterator) iterator = 1;
-
   let div = document.getElementById("modal");
   const divOut = generateModalWindow();
   div.appendChild(divOut);
 
   modal = document.getElementById(`myModal`);
   modal.style.display = "block";
-
-  // iterator++;
 
   const span = document.getElementById(`close`);
   span.onclick = function() {
@@ -96,41 +88,79 @@ window.onclick = function(event) {
 //====================================================================
 //table
 
-const addUser = document.getElementById("addUser");
 let idRow;
 
-addUser.onclick = function() {
-  const tbody = document.getElementsByName("tbody");
+const addUser = document.getElementById("addUser");
+// const table = document.getElementById("test-table");
+// console.log(table);
+const tbody = document.getElementsByTagName("tbody")[0];
+
+console.log(tbody.rows);
+addUser.addEventListener("click", function() {
   if (!idRow) idRow = 1;
-  const firstName = document.getElementById("first-name").value;
-  const lastName = document.getElementById("last-name").value;
+  const firstName = document.getElementById("fname").value;
+  const lastName = document.getElementById("lname").value;
   const email = document.getElementById("email").value;
-  const createdAt = Date.now();
+  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const createdAt = new Date();
+  if (!firstName || !lastName || !regex.test(email)) return;
   const row = genereteRowForTable(idRow, firstName, lastName, email, createdAt);
-  console.log(row);
-  // tbody.appendChild(row);
-};
+  tbody.appendChild(row);
+  selectAllDelAndEditBtn();
+  document.getElementById("fname").value = "";
+  document.getElementById("lname").value = "";
+  document.getElementById("email").value = "";
+  idRow++;
+});
 
 function genereteRowForTable(idRow, firstName, lastName, email, createdAt) {
   const tr = document.createElement("tr");
   tr.id = idRow;
-  const btnDel = generateDeleteRowBtn(idRow);
-  // btnDel.onclick=function(){
-
-  // }
-  btnDel.addEventListener("click", deleteRow, idRow);
-  tr.innerHTML = `<td>${firstName}</td><td>${lastName}</td><td>${email}</td><td>${createdAt}</td><td>${btnDel}</td>`;
+  tr.innerHTML = `<td>${firstName}</td>
+  <td>${lastName}</td>
+  <td>${email}</td>
+  <td>${createdAt.toDateString()}</td>
+  <td><button id="${idRow}-edit" class="btn btn-warning btn-sm">edit</button></td>
+  <td><button id="${idRow}-delete" class="btn btn-danger btn-sm">delete</button></td>`;
   return tr;
 }
-function generateDeleteRowBtn(idRow) {
-  const btnDel = document.createElement("btn");
-  btnDel.id = `del-${idRow}`;
-  btnDel.className = "btn btn-danger btn-sm";
-  btnDel.innerText = "delete";
-  return btnDel;
-}
 
-function deleteRow(idRow) {
-  const tr = document.getElementById(idRow);
-  tr.remove();
+function selectAllDelAndEditBtn() {
+  for (let i = 0; i < tbody.rows.length; i++) {
+    let index = tbody.rows[i].id;
+    const deleteBtn = document.getElementById(`${index}-delete`);
+    // .addEventListener("click", deleteRow(index));
+    const editBtn = document.getElementById(`${index}-edit`);
+    deleteBtn.onclick = function() {
+      const tr = document.getElementById(index);
+      tr.remove();
+    };
+    editBtn.onclick = function() {
+      const tr = document.getElementById(index);
+      const editUser = (document.getElementById("editUser").style.display =
+        "block");
+
+      addUser.style.display = "none";
+      document.getElementById("fname").value = tr.children[0].innerText;
+      document.getElementById("lname").value = tr.children[1].innerText;
+      document.getElementById("email").value = tr.children[2].innerText;
+
+      editUser.onclick = function() {
+        console.log(tr);
+        const firstName = document.getElementById("fname").value;
+        const lastName = document.getElementById("lname").value;
+        const email = document.getElementById("email").value;
+        const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        if (!firstName || !lastName || !regex.test(email)) return;
+        tr.children[0].innerText = firstName;
+        tr.children[1].innerText = lastName;
+        tr.children[2].innerText = email;
+        document.getElementById("fname").value = "";
+        document.getElementById("lname").value = "";
+        document.getElementById("email").value = "";
+        addUser.style.display = "block";
+        editUser.style.display = "none";
+      };
+    };
+  }
 }

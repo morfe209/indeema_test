@@ -57,3 +57,7 @@ body {
   width: 25px;
   color: #fefefe;
 }
+
+.hideBtn {
+  display: none;
+}

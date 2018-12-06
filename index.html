@@ -71,49 +71,55 @@
     <div id="table" class="container">
       <h2>Task3: table</h2>
 
-      <form>
-        <div class="form-row">
-          <div class="col-md-3 mb-3">
-            <label for="first-name">First name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="first-name"
-              placeholder="First name"
-              required
-            />
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="last-name">Last name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="last-name"
-              placeholder="Last name"
-              required
-            />
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              class="form-control is-valid"
-              id="email"
-              placeholder="Email"
-              required
-            />
-            <div class="invalid-feedback">Please provide a valid email.</div>
-          </div>
+      <!-- <form action=""> -->
+      <div class="form-row">
+        <div class="col-md-3 mb-3">
+          <label for="fname">First name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="fname"
+            placeholder="First name"
+            required
+          />
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="lname">Last name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lname"
+            placeholder="Last name"
+            required
+          />
         </div>
 
-        <button id="addUser" class="btn btn-primary" type="submit">
-          submit user
-        </button>
-      </form>
+        <div class="col-md-6 mb-3">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Email"
+            required
+          />
+        </div>
+      </div>
+
+      <button id="addUser" class="btn btn-primary" type="submit">
+        create user
+      </button>
+      <button id="editUser" class="btn btn-primary hideBtn" type="submit">
+        edit user
+      </button>
+      <!-- </form> -->
 
       <!--
         =============================================================================
       -->
+    </div>
+    <br />
+    <div class="container">
       <table id="test-table" class="table">
         <thead class="thead-light">
           <tr>
@@ -125,16 +131,7 @@
             <th scope="col"></th>
           </tr>
         </thead>
-        <tbody>
-          <tr id="1">
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>2 dece</td>
-            <td>2 dece</td>
-            <td>2 dece</td>
-          </tr>
-        </tbody>
+        <tbody></tbody>
       </table>
     </div>
 
